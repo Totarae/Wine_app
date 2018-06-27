@@ -62,6 +62,5 @@ def update(id,name,date,grape,price,dist):
     conn.commit()
     conn.close()
 
-connect()
-
-print(search(name="NR 1957"))
+#print(search(name="Fanagoria"))
+print(view())
