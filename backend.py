@@ -47,8 +47,7 @@ def search(name="",date="",grape="",price=0,dist=""):
 def delete(id):
     conn = sqlite3.connect("winery.db")
     cur = conn.cursor()
-    cur.execute("DELETE FROM wine WHERE id=?",
-                (id))
+    cur.execute("DELETE FROM wine WHERE id=?",(id,))
     conn.commit()
     conn.close()
 
@@ -62,5 +61,6 @@ def update(id,name,date,grape,price,dist):
     conn.commit()
     conn.close()
 
+connect()
 #print(search(name="Fanagoria"))
-print(view())
+#print(view())
