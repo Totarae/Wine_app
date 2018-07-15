@@ -1,5 +1,8 @@
 from tkinter import *
-import backend
+from backend import Database
+
+database = Database("winery.db")
+
 
 def get_selected_rows(event):
     global selected_tuple
@@ -7,34 +10,40 @@ def get_selected_rows(event):
     selected_tuple=list1.get(index)
     e1.delete(0,END)
     e1.insert(END,selected_tuple[1])
-    e2.delete(0, END)
-    e2.insert(END, selected_tuple[2])
-    e3.delete(0, END)
-    e3.insert(END, selected_tuple[3])
-    e4.delete(0, END)
-    e4.insert(END, selected_tuple[4])
+    
 
 def view_command():
     list1.delete(0,END)
-    for row in backend.view():
+    for row in Database.view(database):
         list1.insert(END,row)
 
 def search_command():
     list1.delete(0,END)
-    for row in backend.search(name_text.get(),vine_text.get(),price_text.get(),bin_text.get()):
+    for row in Database.search(database,name_text.get(),vine_text.get(),price_text.get(),bin_text.get()):
         list1.insert(END,row)
 
 def add_command():
-    backend.insert(name_text.get(),vine_text.get(),price_text.get(),bin_text.get(),'')
+    Database.insert(database,name_text.get(),vine_text.get(),price_text.get(),bin_text.get(),'')
     list1.delete(0, END)
     list1.insert(END,(name_text.get(),vine_text.get(),price_text.get(),bin_text.get(),''))
 
 def delete_command():
-    backend.delete(selected_tuple[0])
+    Database.delete(database,selected_tuple[0])
 
 def update_command():
-    backend.update(selected_tuple[0],name_text.get(),'',vine_text.get(),price_text.get(),bin_text.get())
-    print(selected_tuple[0],selected_tuple[1],'',selected_tuple[2],selected_tuple[3],selected_tuple[4])
+    #backend.update
+    # (selected_tuple[0],
+    # name_text.get(),
+    # '',
+    # vine_text.get(),
+    # price_text.get(),
+    # bin_text.get())
+    print(selected_tuple[0],
+          selected_tuple[1],
+          '',
+          selected_tuple[2],
+          selected_tuple[3],
+          selected_tuple[4])
 
 window=Tk()
 
